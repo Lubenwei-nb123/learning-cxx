@@ -1,5 +1,6 @@
 #include "../exercise.h"
 
+// 编译器在计算递归时用的栈不是OS给的，是自己模拟的，导致
 constexpr unsigned long long fibonacci(int i) {
     switch (i) {
         case 0:
@@ -18,8 +19,9 @@ int main(int argc, char **argv) {
 
     // TODO: 观察错误信息，修改一处，使代码编译运行
     // PS: 编译运行，但是不一定能算出结果……
-    constexpr auto ANS_N = 90;
-    constexpr auto ANS = fibonacci(ANS_N);
+    constexpr auto ANS_N = 20;
+    // 加上constexpr时编译器会计算递归函数来判断它是不是常量，如果超过了编译器的最大递归深度就会被认为不是常量
+    auto ANS = fibonacci(ANS_N);
     std::cout << "fibonacci(" << ANS_N << ") = " << ANS << std::endl;
 
     return 0;
